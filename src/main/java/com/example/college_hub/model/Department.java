@@ -1,34 +1,48 @@
 package com.example.college_hub.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Builder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
-import static com.example.college_hub.util.EnityModelConstants.DEPARTMENT_TABLE_NAME;
+import static com.example.college_hub.util.EnityTableName.DEPARTMENT_TABLE_NAME;
 
 @Entity
-@Table(name = DEPARTMENT_TABLE_NAME)
+@Table(name = DEPARTMENT_TABLE_NAME, indexes = {
+        @Index(name = "idx_department_id", columnList = "department_id"),
+        @Index(name = "idx_dept_college", columnList = "college_code, college_name")
+})
+@Builder
 public class Department implements Serializable {
+    @Serial
     private static final long serialVersionUID = -729241559328644647L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "department_id")
     private Long departmentId;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumns({
+        @JoinColumn(name = "college_code", referencedColumnName = "college_code"),
+        @JoinColumn(name = "college_name", referencedColumnName = "college_name")
+    })
+    private College college;
 
-    private List<Branch> branchList;
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Branch> branches;
 
     @CreationTimestamp
     @Column(updatable = false)
-    private LocalDateTime createdDate;
+    @Temporal(TemporalType.DATE)
+    private LocalDate createdDate;
 
     @UpdateTimestamp
-    private LocalDateTime lastModifiedDate;
+    @Temporal(TemporalType.DATE)
+    private LocalDate lastModifiedDate;
 }
