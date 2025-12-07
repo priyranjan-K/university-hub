@@ -1,4 +1,4 @@
-package com.example.demo.college_hub.model;
+package com.example.college_hub.model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,6 +8,7 @@ public class Section implements Serializable {
     private Long sectionId;
     private SectionList section;
     private List<Faculty> facultyList;
+
     private enum SectionList {
         A, B, C, D, E
     }

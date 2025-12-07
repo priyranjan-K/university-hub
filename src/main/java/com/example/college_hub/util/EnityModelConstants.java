@@ -1,4 +1,4 @@
-package com.example.demo.college_hub.util;
+package com.example.college_hub.util;
 
 public class EnityModelConstants {
 

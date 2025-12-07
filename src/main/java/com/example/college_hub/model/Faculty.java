@@ -1,4 +1,4 @@
-package com.example.demo.college_hub.model;
+package com.example.college_hub.model;
 
 
 import java.io.Serializable;

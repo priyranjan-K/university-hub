@@ -1,4 +1,4 @@
-package com.example.demo.college_hub.model;
+package com.example.college_hub.model;
 
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.example.demo.college_hub.util.EnityModelConstants.COllEGE_TABLE_NAME;
+import static com.example.college_hub.util.EnityModelConstants.COllEGE_TABLE_NAME;
 
 @Entity
 @Table(name = COllEGE_TABLE_NAME)

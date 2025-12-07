@@ -1,11 +1,11 @@
-package com.example.demo.college_hub.model;
+package com.example.college_hub.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 import java.io.Serializable;
 
-import static com.example.demo.college_hub.util.EnityModelConstants.BRANCH_TABLE_NAME;
+import static com.example.college_hub.util.EnityModelConstants.BRANCH_TABLE_NAME;
 
 @Entity
 @Table(name = BRANCH_TABLE_NAME)
