@@ -27,7 +27,7 @@ public class Branch implements Serializable {
     @EmbeddedId
     private BranchId branchId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true) // Changed to true
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 

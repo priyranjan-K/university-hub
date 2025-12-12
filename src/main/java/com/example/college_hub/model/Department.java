@@ -31,8 +31,8 @@ public class Department implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumns({
-        @JoinColumn(name = "college_code", referencedColumnName = "collegeCode"), // Changed to property name
-        @JoinColumn(name = "college_name", referencedColumnName = "collegeName")  // Changed to property name
+        @JoinColumn(name = "college_code", referencedColumnName = "collegeCode"),
+        @JoinColumn(name = "college_name", referencedColumnName = "collegeName")
     })
     private College college;
 

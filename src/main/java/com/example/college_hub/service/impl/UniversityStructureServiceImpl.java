@@ -24,14 +24,8 @@ public class UniversityStructureServiceImpl implements UniversityStructureServic
     @Override
     @Transactional
     public UniversityDto createOrUpdateUniversityStructure(UniversityDto universityDto) {
-        // Convert the entire DTO tree to an entity tree
         University university = universityMapper.toEntity(universityDto);
-
-        // The @Transactional annotation ensures that all the cascading saves
-        // happen within a single database transaction.
         University savedUniversity = universityRepository.save(university);
-
-        // Convert the saved entity tree back to a DTO tree to return to the client
         return universityMapper.toDto(savedUniversity);
     }
 }
