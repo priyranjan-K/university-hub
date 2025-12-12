@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: University Hub Structure API
+  title: University Hub API
   description: An API to manage entire university hierarchies in a single request.
   version: 1.0.0
 servers:
@@ -8,14 +8,14 @@ servers:
     description: Local server
 
 tags:
-  - name: UniversityStructure
+  - name: UniversityHub
     description: Operations to manage a complete university structure.
 
 paths:
-  /api/university-structure:
+  /api/university-hub:
     post:
       tags:
-        - UniversityStructure
+        - UniversityHub
       summary: Create or update a complete university structure
       operationId: createOrUpdateUniversityStructure
       requestBody:
@@ -96,7 +96,7 @@ components:
           items: { $ref: '#/components/schemas/StudentDto' }
         faculties:
           type: array
-          items: { $ref: '#/components/schemas/FacultyDto' } # For section-specific faculty assignments
+          items: { $ref: '#/components/schemas/FacultyDto' }
 
     StudentDto:
       type: object
