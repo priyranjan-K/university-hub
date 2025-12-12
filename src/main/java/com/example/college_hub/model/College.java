@@ -2,7 +2,8 @@ package com.example.college_hub.model;
 
 import com.example.college_hub.model.comp_key.CollegeId;
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,19 +16,14 @@ import static com.example.college_hub.util.EnityTableName.COLLEGE_TABLE_NAME;
 
 @Entity
 @Table(name = COLLEGE_TABLE_NAME)
-@IdClass(CollegeId.class)
-@Builder
+@Data
+@NoArgsConstructor
 public class College implements Serializable {
     @Serial
     private static final long serialVersionUID = -6347149431888959492L;
 
-    @Id
-    @Column(name = "college_code")
-    private String collegeCode;
-
-    @Id
-    @Column(name = "college_name")
-    private String collegeName;
+    @EmbeddedId
+    private CollegeId collegeId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "university_id", nullable = false)

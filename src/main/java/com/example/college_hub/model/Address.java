@@ -1,7 +1,8 @@
 package com.example.college_hub.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,7 +17,8 @@ import static com.example.college_hub.util.EnityTableName.ADDRESS_TABLE_NAME;
         @Index(name = "idx_addr_college", columnList = "college_code, college_name"),
         @Index(name = "idx_university_id", columnList = "university_id")
 })
-@Builder
+@Data
+@NoArgsConstructor
 public class Address implements Serializable {
     @Serial
     private static final long serialVersionUID = -7570681885981445452L;
@@ -46,8 +48,8 @@ public class Address implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-        @JoinColumn(name = "college_code", referencedColumnName = "college_code"),
-        @JoinColumn(name = "college_name", referencedColumnName = "college_name")
+        @JoinColumn(name = "college_code", referencedColumnName = "collegeCode"), // Changed to property name
+        @JoinColumn(name = "college_name", referencedColumnName = "collegeName")  // Changed to property name
     })
     private College college;
 

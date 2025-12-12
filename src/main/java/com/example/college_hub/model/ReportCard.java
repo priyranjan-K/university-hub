@@ -1,7 +1,8 @@
 package com.example.college_hub.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -12,7 +13,8 @@ import static com.example.college_hub.util.EnityTableName.REPORT_CARD_TABLE_NAME
 @Table(name = REPORT_CARD_TABLE_NAME, indexes = {
         @Index(name = "idx_student_id", columnList = "student_id")
 })
-@Builder
+@Data
+@NoArgsConstructor
 public class ReportCard implements Serializable {
 
     @Serial

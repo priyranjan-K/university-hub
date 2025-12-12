@@ -1,0 +1,149 @@
+openapi: 3.0.3
+info:
+  title: University Hub Structure API
+  description: An API to manage entire university hierarchies in a single request.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8083
+    description: Local server
+
+tags:
+  - name: UniversityStructure
+    description: Operations to manage a complete university structure.
+
+paths:
+  /api/university-structure:
+    post:
+      tags:
+        - UniversityStructure
+      summary: Create or update a complete university structure
+      operationId: createOrUpdateUniversityStructure
+      requestBody:
+        description: A complete University object with all its nested colleges, departments, etc.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UniversityDto'
+      responses:
+        '201':
+          description: University structure created/updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UniversityDto'
+        '400':
+          description: Invalid input provided.
+
+components:
+  schemas:
+    UniversityDto:
+      type: object
+      properties:
+        universityId: { type: integer, format: int64, readOnly: true }
+        universityCode: { type: string }
+        addresses:
+          type: array
+          items: { $ref: '#/components/schemas/AddressDto' }
+        colleges:
+          type: array
+          items: { $ref: '#/components/schemas/CollegeDto' }
+        createdDate: { type: string, format: date, readOnly: true }
+        lastModifiedDate: { type: string, format: date, readOnly: true }
+
+    CollegeDto:
+      type: object
+      properties:
+        collegeCode: { type: string }
+        collegeName: { type: string }
+        status: { $ref: '#/components/schemas/StatusDto' }
+        addresses:
+          type: array
+          items: { $ref: '#/components/schemas/AddressDto' }
+        departments:
+          type: array
+          items: { $ref: '#/components/schemas/DepartmentDto' }
+        createdDate: { type: string, format: date, readOnly: true }
+        lastModifiedDate: { type: string, format: date, readOnly: true }
+
+    DepartmentDto:
+      type: object
+      properties:
+        departmentId: { type: integer, format: int64, readOnly: true }
+        branches:
+          type: array
+          items: { $ref: '#/components/schemas/BranchDto' }
+
+    BranchDto:
+      type: object
+      properties:
+        branchName: { type: string }
+        branchCode: { type: string }
+        sections:
+          type: array
+          items: { $ref: '#/components/schemas/SectionDto' }
+        faculty:
+          type: array
+          items: { $ref: '#/components/schemas/FacultyDto' }
+
+    SectionDto:
+      type: object
+      properties:
+        sectionId: { type: integer, format: int64, readOnly: true }
+        sectionName: { type: string }
+        students:
+          type: array
+          items: { $ref: '#/components/schemas/StudentDto' }
+        faculties:
+          type: array
+          items: { $ref: '#/components/schemas/FacultyDto' } # For section-specific faculty assignments
+
+    StudentDto:
+      type: object
+      properties:
+        studentId: { type: integer, format: int64, readOnly: true }
+        name: { type: string }
+        email: { type: string, format: email }
+        gender: { type: string }
+        dateOfBirth: { type: string, format: date }
+        admissionDate: { type: string, format: date }
+        mobileNumber: { type: string }
+        address: { $ref: '#/components/schemas/AddressDto' }
+        reportCard: { $ref: '#/components/schemas/ReportCardDto' }
+
+    FacultyDto:
+      type: object
+      properties:
+        facultyId: { type: integer, format: int64, readOnly: true }
+        facultyName: { type: string }
+        majorName: { type: string }
+        joiningDate: { type: string, format: date }
+
+    AddressDto:
+      type: object
+      properties:
+        addressId: { type: integer, format: int64, readOnly: true }
+        houseNumber: { type: string }
+        addressLine1: { type: string }
+        addressLine2: { type: string }
+        street: { type: string }
+        city: { type: string }
+        state: { type: string }
+        zipCode: { type: string }
+        country: { type: string }
+        addressType: { type: string, enum: [HOME, OFFICE, OTHERS] }
+
+    ReportCardDto:
+      type: object
+      properties:
+        reportCardId: { type: integer, format: int64, readOnly: true }
+        semester: { type: string, enum: [I, II, III, IV, V, VI, VII, VIII] }
+        marks: { type: string }
+        reportCardStatus: { type: string, enum: [PASS, FAIL, DISTINCTION, FIRST_CLASS, SECOND_CLASS, THIRD_CLASS] }
+
+    StatusDto:
+      type: object
+      properties:
+        id: { type: integer, format: int64, readOnly: true }
+        statusCode: { type: string, enum: [ACTIVE, INACTIVE, PENDING, LEFT, SUSPENDED] }
+        statusReason: { type: string }

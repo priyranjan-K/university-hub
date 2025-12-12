@@ -1,9 +1,6 @@
 package com.example.college_hub.model.comp_key;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -13,6 +10,7 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class CollegeId implements Serializable {
 
     @Serial

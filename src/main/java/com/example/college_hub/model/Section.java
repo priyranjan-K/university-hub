@@ -1,7 +1,8 @@
 package com.example.college_hub.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,11 +18,11 @@ import static com.example.college_hub.util.EnityTableName.SECTION_TABLE_NAME;
         @Index(name = "idx_section_name", columnList = "sectionName"),
         @Index(name = "idx_sec_branch", columnList = "branchName, branchCode")
 })
-@Builder
+@Data
+@NoArgsConstructor
 public class Section implements Serializable {
     @Serial
     private static final long serialVersionUID = 4882979714239832572L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "section_id")

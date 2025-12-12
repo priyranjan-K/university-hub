@@ -1,7 +1,8 @@
 package com.example.college_hub.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -16,7 +17,8 @@ import static com.example.college_hub.util.EnityTableName.UNIVERSITY_TABLE_NAME;
 @Table(name = UNIVERSITY_TABLE_NAME, indexes = {
         @Index(name = "idx_university_code", columnList = "university_code")
 })
-@Builder
+@Data
+@NoArgsConstructor
 public class University implements Serializable {
 
     @Serial
@@ -44,5 +46,4 @@ public class University implements Serializable {
     @UpdateTimestamp
     @Temporal(TemporalType.DATE)
     private LocalDate lastModifiedDate;
-
 }

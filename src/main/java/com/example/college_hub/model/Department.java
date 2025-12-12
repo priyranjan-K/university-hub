@@ -2,7 +2,8 @@ package com.example.college_hub.model;
 
 
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -18,7 +19,8 @@ import static com.example.college_hub.util.EnityTableName.DEPARTMENT_TABLE_NAME;
         @Index(name = "idx_department_id", columnList = "department_id"),
         @Index(name = "idx_dept_college", columnList = "college_code, college_name")
 })
-@Builder
+@Data
+@NoArgsConstructor
 public class Department implements Serializable {
     @Serial
     private static final long serialVersionUID = -729241559328644647L;
@@ -29,8 +31,8 @@ public class Department implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumns({
-        @JoinColumn(name = "college_code", referencedColumnName = "college_code"),
-        @JoinColumn(name = "college_name", referencedColumnName = "college_name")
+        @JoinColumn(name = "college_code", referencedColumnName = "collegeCode"), // Changed to property name
+        @JoinColumn(name = "college_name", referencedColumnName = "collegeName")  // Changed to property name
     })
     private College college;
 
