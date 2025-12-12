@@ -37,14 +37,13 @@ public class SectionMapper {
         return dto;
     }
 
-    // Overloaded method to be called from BranchMapper
     public Section toEntity(SectionDto dto, Branch parentBranch) {
         if (dto == null) return null;
 
         Section section = new Section();
         section.setSectionId(dto.getSectionId());
         section.setSectionName(dto.getSectionName());
-        section.setBranch(parentBranch); // Set the back-reference to the branch
+        section.setBranch(parentBranch);
 
         if (dto.getStudents() != null) {
             section.setStudents(dto.getStudents().stream().map(studentMapper::toEntity).collect(Collectors.toList()));
@@ -57,7 +56,6 @@ public class SectionMapper {
             List<Faculty> faculties = dto.getFaculties().stream()
                 .map(facultyMapper::toEntity)
                 .collect(Collectors.toList());
-            // This is the critical fix: associate the faculty with the correct branch
             faculties.forEach(faculty -> faculty.setBranch(parentBranch));
             section.setFaculties(faculties);
         } else {
@@ -67,7 +65,6 @@ public class SectionMapper {
         return section;
     }
     
-    // Keep the old method for cases where it might be called without a parent context
     public Section toEntity(SectionDto dto) {
         return toEntity(dto, null);
     }

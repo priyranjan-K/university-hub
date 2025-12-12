@@ -50,8 +50,6 @@ public class CollegeMapper {
         College college = new College();
         college.setCollegeId(new CollegeId(dto.getCollegeCode(), dto.getCollegeName()));
         college.setStatus(statusMapper.toEntity(dto.getStatus()));
-        // createdDate and lastModifiedDate are typically set by @CreationTimestamp/@UpdateTimestamp
-        // so we don't map them from DTO to entity for creation/update operations.
         
         if (college.getStatus() != null) {
             college.getStatus().setCollege(college);

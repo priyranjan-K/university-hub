@@ -46,7 +46,6 @@ public class BranchMapper {
         branch.setBranchId(new BranchId(dto.getBranchName(), dto.getBranchCode()));
         
         if (dto.getSections() != null) {
-            // Pass the parent branch to the section mapper
             branch.setSections(dto.getSections().stream()
                 .map(sectionDto -> sectionMapper.toEntity(sectionDto, branch))
                 .collect(Collectors.toList()));

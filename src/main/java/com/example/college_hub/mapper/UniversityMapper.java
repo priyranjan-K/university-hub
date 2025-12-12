@@ -42,8 +42,6 @@ public class UniversityMapper {
         University university = new University();
         university.setUniversityId(dto.getUniversityId());
         university.setUniversityCode(dto.getUniversityCode());
-        // createdDate and lastModifiedDate are typically set by @CreationTimestamp/@UpdateTimestamp
-        // so we don't map them from DTO to entity for creation/update operations.
         
         if (dto.getColleges() != null) {
             university.setColleges(dto.getColleges().stream().map(collegeMapper::toEntity).collect(Collectors.toList()));
